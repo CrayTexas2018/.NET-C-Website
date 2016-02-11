@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainTemplate.master.cs" Inherits="JBPhotography.MainTemplate" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <link href="https://d3aa86f1cc1189741f5184ac11cbaa7a612b5a1b.googledrive.com/secure/ACQbPCOehHoGfNC8l1sVssj4urNjmSbNoZWTJmt0RqEilFRYrp5gfR5aV1txtcWyMAwtYILlHdaRVHBXuIhx5cgUZVGWqRAoW7TRauL5Yocd12PdikoPSJcUE-Riy9rBAg9uStDLThiYc0wBTQqPlmpjaWT1_-u869KBZjm2N9gZymcQ1NQrdAYIj5tYkHAjliL9RrMW2CgBrgwFG_WTMKxBEa3lvMqV-I63Tt_CP6pPy9MgA4Kcl9vDXYElBp2K4wzWx9B-ZuFnxLejKjjJOFw7rrVDctbDmJBEBI3ZQsrzyBmj770DnSs9y0WE1jxvfB1pJg6iys50PZ_h18pZyu5crJjrkHpA5OuHi-oxGwe8V_dAGkfunp3olrlrsCKVfdl4YnslTNoeD6DzApkcAnYPGiljHuGH9joVyw6oJYqQpVUMRytEkATB_m2ef7aX5hNkbvpPUsOFFbACmvsRnSGu3NTGxJ0lgdQq6bGLSKU9eXIa7-eQ2Xi4ViVJPZyG02fCVbGn0rAomXIp1vNJ3IG9nL3lH7YGVZYm1WsxNKjxWkA9_Az0BDSnazGWq8R5tcCminaOvmKx/host/0B42YsSxMu3rfY3NCdzgwMHZvQWM/Style2.css" rel="stylesheet" type="text/css" />
+    
+    
+
+    <title>James Bruce Photography</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server" defaultbutton="">
+        <div id="wrapper"></div>
+        <div id ="Cloud">
+        <div id="Container">
+            <div id="Header"></div>
+            <div id="NavBar">
+                <ul>
+                    <li><a href="Default.aspx">Home</a></li>
+                    <li><a href="Default.aspx">Products</a></li>
+                    <li><a href="Checkout_selectCalendar.aspx">Order Photography</a></li>
+                    <li><a href="Default.aspx">Terms Of Service</a></li>
+                    <% if (Session["ID"] + "" != "") { 
+                        %>
+                    <li style="float:right; font-size:14px;padding-top:5px; text-decoration:underline;"><a href="Logout.aspx">Logout</a></li>
+                    <li style="float:right; font-size:14px;padding-top:5px;"><%Response.Write(HttpContext.Current.Session["Email"]);%></li>
+                    <li style="float:right; font-size:14px;padding-top:5px; text-decoration:underline;"><a href="Checkout_Payment.aspx">
+                        <asp:Label ID="CartLabel" runat="server" Text="Cart Goes Here"></asp:Label></a></li>
+                    <%}
+                        else
+                        {%>
+                    <li style="float:right; font-size:14px;padding-top:5px; text-decoration:underline;"><a href="Login.aspx">Login</a></li>
+                    <%} %>
+                    
+                </ul>
+            </div>
+            <div id="Content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+            </div>
+            <div id="Footer">
+                <ul>
+                    <%if (Convert.ToString(HttpContext.Current.Session["IsAdmin"]) == "True")
+                        {%>
+                            <li><a href="/Admin.aspx">Admin</a></li>
+                        <%} %>
+                    <li><%Response.Write(HttpContext.Current.Session["Email"]);%></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </form>
+</body>
+</html>
